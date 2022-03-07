@@ -1,0 +1,33 @@
+body{
+    background-color: black;
+}
+
+h1{
+    color: white;
+}
+
+.horizontalLine{
+    color: white;
+    width: 100%;
+    opacity: 1;
+    
+}
+
+.createElementPtagTxt{
+    color: white;
+    font-size: 1rem;
+}
+
+.deleteBtn{
+    color: black;
+    outline: none;
+}
+
+.deleteElementBtn:hover{
+    color: rgba(255, 255, 255, 0.605);
+}
+
+.marginBtm{
+    margin-bottom: 0px;
+}
+
