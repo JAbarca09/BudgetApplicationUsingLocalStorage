@@ -1,0 +1,12 @@
+body{
+    background-color: black;
+}
+
+h1{
+    color: white
+}
+
+.DisplayTxt{
+    font-size: 1.5rem;
+    color: white;
+}
