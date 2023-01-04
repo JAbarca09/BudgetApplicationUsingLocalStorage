@@ -11,12 +11,26 @@ let injectHere = document.getElementById('injectHere');
 let DisplayExpenses = document.getElementById('DisplayExpenses');
 let BudgetDisplay = document.getElementById('BudgetDisplay');
 
+//Connection to toast elements
+let alertToast = document.getElementById('alert-toast');
+let alertToastContent = document.getElementById('alert-toast-content');
+
 let budget;
 EnterBudgetBtn.addEventListener('click', function (e) {
     // console.log(EnterBudget.value);
-    BudgetDisplay.textContent = "Balance: $" + EnterBudget.value;
-    SaveBudgetToLocalStorage(EnterBudget.value);
-    budget = GetUserBudget();
+
+    if(EnterBudget.value < 0 || EnterBudget.value === 0) {
+        //alert toast pops out
+        alertToastContent.textContent = "Enter a valid budget";
+        setTimeout(() => {
+             alertToast.classList.remove("show");
+        },10000);
+        alertToast.classList.add("show");
+    } else {
+        BudgetDisplay.textContent = "Balance: $" + EnterBudget.value;
+        SaveBudgetToLocalStorage(EnterBudget.value);
+        budget = GetUserBudget();
+    }
 });
 
 //this clears local storage and refreshes the page!
@@ -67,12 +81,20 @@ function CalculateRemainingBudgetOnStart() {
 
 
 EnterExpenseBtn.addEventListener('click', function (e) {
-
-    AddAnotherExpenseToLocalStorage(EnterExpense.value);
-    AddAnotherVendorToLocalStorage(EnterVendor.value);
-    CreateElement(EnterExpense.value, EnterVendor.value);
-    budget = CalculateRemainingBudget(budget, EnterExpense.value);
-    DisplayOverallExpenses();
+    console.log(EnterExpense.value);
+    if(EnterExpense.value < 0) {
+        alertToastContent.textContent = "Enter a valid expense";
+        setTimeout(() => {
+             alertToast.classList.remove("show");
+        },10000);
+        alertToast.classList.add("show");
+    } else {
+        AddAnotherExpenseToLocalStorage(EnterExpense.value);
+        AddAnotherVendorToLocalStorage(EnterVendor.value);
+        CreateElement(EnterExpense.value, EnterVendor.value);
+        budget = CalculateRemainingBudget(budget, EnterExpense.value);
+        DisplayOverallExpenses();
+    }
 });
 
 
@@ -150,4 +172,4 @@ function CheckForLocalStorageDisplayIt() {
 CheckForLocalStorageDisplayIt();
 CalculateRemainingBudgetOnStart();
 BudgetDisplay.className = "DisplayTxt";
-DisplayExpenses.className = "DisplayTxt"
+DisplayExpenses.className = "DisplayTxt";
