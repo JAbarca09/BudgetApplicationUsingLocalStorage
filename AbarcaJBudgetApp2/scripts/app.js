@@ -14,9 +14,15 @@ let BudgetDisplay = document.getElementById('BudgetDisplay');
 let budget;
 EnterBudgetBtn.addEventListener('click', function (e) {
     // console.log(EnterBudget.value);
-    BudgetDisplay.textContent = "Balance: $" + EnterBudget.value;
-    SaveBudgetToLocalStorage(EnterBudget.value);
-    budget = GetUserBudget();
+
+    if(EnterBudget.value < 0 || EnterBudget.value === 0) {
+        //alert toast pops out
+    } else {
+
+        BudgetDisplay.textContent = "Balance: $" + EnterBudget.value;
+        SaveBudgetToLocalStorage(EnterBudget.value);
+        budget = GetUserBudget();
+    }
 });
 
 //this clears local storage and refreshes the page!
