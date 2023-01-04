@@ -172,4 +172,4 @@ function CheckForLocalStorageDisplayIt() {
 CheckForLocalStorageDisplayIt();
 CalculateRemainingBudgetOnStart();
 BudgetDisplay.className = "DisplayTxt";
-DisplayExpenses.className = "DisplayTxt"
+DisplayExpenses.className = "DisplayTxt";
