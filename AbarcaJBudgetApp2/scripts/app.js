@@ -81,12 +81,20 @@ function CalculateRemainingBudgetOnStart() {
 
 
 EnterExpenseBtn.addEventListener('click', function (e) {
-
-    AddAnotherExpenseToLocalStorage(EnterExpense.value);
-    AddAnotherVendorToLocalStorage(EnterVendor.value);
-    CreateElement(EnterExpense.value, EnterVendor.value);
-    budget = CalculateRemainingBudget(budget, EnterExpense.value);
-    DisplayOverallExpenses();
+    console.log(EnterExpense.value);
+    if(EnterExpense.value < 0) {
+        alertToastContent.textContent = "Enter a valid expense";
+        setTimeout(() => {
+             alertToast.classList.remove("show");
+        },10000);
+        alertToast.classList.add("show");
+    } else {
+        AddAnotherExpenseToLocalStorage(EnterExpense.value);
+        AddAnotherVendorToLocalStorage(EnterVendor.value);
+        CreateElement(EnterExpense.value, EnterVendor.value);
+        budget = CalculateRemainingBudget(budget, EnterExpense.value);
+        DisplayOverallExpenses();
+    }
 });
 
 
