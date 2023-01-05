@@ -81,9 +81,17 @@ function CalculateRemainingBudgetOnStart() {
 
 
 EnterExpenseBtn.addEventListener('click', function (e) {
-    // console.log(EnterExpense.value);
-    //check if there is a value for vendor
-    if (EnterVendor.value.length <= 0) {
+    //Check if there is a valid budget before the expense is added!
+    let checkBudget = GetUserBudget();
+    if (checkBudget === null) {
+        //if the budget is null that means there is not one!
+        alertToastContent.textContent = "Enter a budget before adding expenses";
+        setTimeout(() => {
+            alertToast.classList.remove("show");
+        }, 10000);
+        alertToast.classList.add("show");
+    }
+    else if (EnterVendor.value.length <= 0) {
         alertToastContent.textContent = "Enter a valid vendor";
         setTimeout(() => {
             alertToast.classList.remove("show");
