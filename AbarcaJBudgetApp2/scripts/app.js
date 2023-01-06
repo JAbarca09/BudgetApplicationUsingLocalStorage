@@ -19,12 +19,12 @@ let budget;
 EnterBudgetBtn.addEventListener('click', function (e) {
     // console.log(EnterBudget.value);
 
-    if(EnterBudget.value < 0 || EnterBudget.value === 0) {
+    if (EnterBudget.value < 0 || EnterBudget.value === 0 || EnterBudget.value.length <= 0) {
         //alert toast pops out
         alertToastContent.textContent = "Enter a valid budget";
         setTimeout(() => {
-             alertToast.classList.remove("show");
-        },10000);
+            alertToast.classList.remove("show");
+        }, 10000);
         alertToast.classList.add("show");
     } else {
         BudgetDisplay.textContent = "Balance: $" + EnterBudget.value;
@@ -34,7 +34,7 @@ EnterBudgetBtn.addEventListener('click', function (e) {
 });
 
 //this clears local storage and refreshes the page!
-resetBtn.addEventListener('click', function(){
+resetBtn.addEventListener('click', function () {
     localStorage.clear();
     window.location.reload();
 });
@@ -81,12 +81,28 @@ function CalculateRemainingBudgetOnStart() {
 
 
 EnterExpenseBtn.addEventListener('click', function (e) {
-    console.log(EnterExpense.value);
-    if(EnterExpense.value < 0) {
+    //Check if there is a valid budget before the expense is added!
+    let checkBudget = GetUserBudget();
+    if (checkBudget === null) {
+        //if the budget is null that means there is not one!
+        alertToastContent.textContent = "Enter a budget before adding expenses";
+        setTimeout(() => {
+            alertToast.classList.remove("show");
+        }, 10000);
+        alertToast.classList.add("show");
+    }
+    else if (EnterVendor.value.length <= 0) {
+        alertToastContent.textContent = "Enter a valid vendor";
+        setTimeout(() => {
+            alertToast.classList.remove("show");
+        }, 10000);
+        alertToast.classList.add("show");
+    }
+    else if (EnterExpense.value < 0 || EnterExpense.value.length <= 0) {
         alertToastContent.textContent = "Enter a valid expense";
         setTimeout(() => {
-             alertToast.classList.remove("show");
-        },10000);
+            alertToast.classList.remove("show");
+        }, 10000);
         alertToast.classList.add("show");
     } else {
         AddAnotherExpenseToLocalStorage(EnterExpense.value);
