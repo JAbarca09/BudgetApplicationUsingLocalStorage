@@ -15,7 +15,9 @@ let BudgetDisplay = document.getElementById('BudgetDisplay');
 let alertToast = document.getElementById('alert-toast');
 let alertToastContent = document.getElementById('alert-toast-content');
 
-let budget;
+let budget = GetUserBudget();
+budget !== null ? EnterBudgetBtn.disabled = true : EnterBudgetBtn.disabled = false;
+
 EnterBudgetBtn.addEventListener('click', function (e) {
     // console.log(EnterBudget.value);
 
@@ -30,6 +32,8 @@ EnterBudgetBtn.addEventListener('click', function (e) {
         BudgetDisplay.textContent = "Balance: $" + EnterBudget.value;
         SaveBudgetToLocalStorage(EnterBudget.value);
         budget = GetUserBudget();
+        // EnterBudgetBtn.classList.add("removeFromDOM");
+        EnterBudgetBtn.disabled = true;
     }
 });
 
@@ -37,6 +41,7 @@ EnterBudgetBtn.addEventListener('click', function (e) {
 resetBtn.addEventListener('click', function () {
     localStorage.clear();
     window.location.reload();
+    EnterBudgetBtn.disabled = false;
 });
 
 function DisplayOverallExpenses() {
