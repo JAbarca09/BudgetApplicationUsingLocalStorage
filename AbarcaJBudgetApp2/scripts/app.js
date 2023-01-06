@@ -30,6 +30,7 @@ EnterBudgetBtn.addEventListener('click', function (e) {
         BudgetDisplay.textContent = "Balance: $" + EnterBudget.value;
         SaveBudgetToLocalStorage(EnterBudget.value);
         budget = GetUserBudget();
+        EnterBudgetBtn.classList.add("removeFromDOM");
     }
 });
 
@@ -37,6 +38,7 @@ EnterBudgetBtn.addEventListener('click', function (e) {
 resetBtn.addEventListener('click', function () {
     localStorage.clear();
     window.location.reload();
+    EnterBudgetBtn.classList.remove("removeFromDOM");
 });
 
 function DisplayOverallExpenses() {
