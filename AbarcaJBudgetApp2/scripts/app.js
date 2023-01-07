@@ -17,6 +17,7 @@ let alertToastContent = document.getElementById('alert-toast-content');
 
 let budget = GetUserBudget();
 budget !== null ? EnterBudgetBtn.disabled = true : EnterBudgetBtn.disabled = false;
+budget !== null ? EnterBudget.disabled = true : EnterBudget.disabled = false;
 
 EnterBudgetBtn.addEventListener('click', function (e) {
     // console.log(EnterBudget.value);
@@ -34,6 +35,7 @@ EnterBudgetBtn.addEventListener('click', function (e) {
         budget = GetUserBudget();
         // EnterBudgetBtn.classList.add("removeFromDOM");
         EnterBudgetBtn.disabled = true;
+        EnterBudget.disabled = true;
     }
 });
 
@@ -42,6 +44,7 @@ resetBtn.addEventListener('click', function () {
     localStorage.clear();
     window.location.reload();
     EnterBudgetBtn.disabled = false;
+    EnterBudget.disabled = false;
 });
 
 function DisplayOverallExpenses() {
@@ -60,7 +63,6 @@ function CalculateRemainingBudget(userBudget, Expense) {
     //if you do not update the original budget, it will always subtract the original budget the user entered from the expense and will be bugged!
     let remainingBudget = parseInt(userBudget) - parseInt(Expense);
     BudgetDisplay.textContent = "Balance: $" + remainingBudget;
-    console.log(remainingBudget);
     return remainingBudget;
 }
 
@@ -79,7 +81,11 @@ function CalculateRemainingBudgetOnStart() {
         let remainingBudget = parseInt(userBudget) - expensesSum;
         BudgetDisplay.textContent = "Balance: $" + remainingBudget;
         return remainingBudget;
+    } else if (userBudget != null) {
+        //if a budget is declared but there are no expenses the budget remaining is the userBudget
+        BudgetDisplay.textContent = "Balance: $" + userBudget;
     } else {
+        //if a budget has yet to be declared just make it 0
         BudgetDisplay.textContent = "Balance: $" + "0";
     }
 }
@@ -145,10 +151,31 @@ function CreateElement(Cost, Vendor) {
 
     DeleteButton.addEventListener('click', function (e) {
         //Remove both the cost and vendor from local storage!
-        RemoveExpenseFromLocalStorage(Cost);
+        let tempExpenses = GetUserExpensesFromLocalStorage();
+        let totalExpenses = 0;
+        let currentBal = 0;
+        let firstTimeRun = false;
+        console.log(tempExpenses);
+
+        //check if the page was refreshed, if it was the input field is an empty string!
+        //should only run for the first value once
+        if (EnterBudget.value === "" || firstTimeRun === false) {
+            //page was refreshed
+            let OverallBudget = GetUserBudget();
+
+            //get the total expenses
+            for (let i = 0; i < tempExpenses.length; i++) {
+                totalExpenses += parseInt(tempExpenses[i]);
+            }
+            currentBal = (parseInt(OverallBudget) - totalExpenses) + parseInt(Cost);
+            BudgetDisplay.textContent = "Balance: $" + currentBal;
+            firstTimeRun = true;
+        } else {
+            //page was not refreshed
+            budget = CalculateReminbursementBudget(budget, Cost);
+        }
+        RemoveExpenseFromLocalStorage(Cost.toString());
         RemoveVendorFromLocalStorage(Vendor);
-        budget = CalculateReminbursementBudget(budget, Cost);
-        console.log(budget);
         document.getElementById(Vendor).remove();
         //UPDATE THE OVERALL EXPENSES OF THE USER after deleting an object occurs!
         DisplayOverallExpenses();
