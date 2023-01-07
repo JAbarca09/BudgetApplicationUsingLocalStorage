@@ -17,6 +17,7 @@ let alertToastContent = document.getElementById('alert-toast-content');
 
 let budget = GetUserBudget();
 budget !== null ? EnterBudgetBtn.disabled = true : EnterBudgetBtn.disabled = false;
+budget !== null ? EnterBudget.disabled = true : EnterBudget.disabled = false;
 
 EnterBudgetBtn.addEventListener('click', function (e) {
     // console.log(EnterBudget.value);
