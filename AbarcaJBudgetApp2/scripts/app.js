@@ -34,6 +34,7 @@ EnterBudgetBtn.addEventListener('click', function (e) {
         budget = GetUserBudget();
         // EnterBudgetBtn.classList.add("removeFromDOM");
         EnterBudgetBtn.disabled = true;
+        EnterBudget.disabled = true;
     }
 });
 
@@ -42,6 +43,7 @@ resetBtn.addEventListener('click', function () {
     localStorage.clear();
     window.location.reload();
     EnterBudgetBtn.disabled = false;
+    EnterBudget.disabled = false;
 });
 
 function DisplayOverallExpenses() {
