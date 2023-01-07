@@ -79,7 +79,11 @@ function CalculateRemainingBudgetOnStart() {
         let remainingBudget = parseInt(userBudget) - expensesSum;
         BudgetDisplay.textContent = "Balance: $" + remainingBudget;
         return remainingBudget;
+    } else if(userBudget != null) {
+        //if a budget is declared but there are no expenses the budget remaining is the userBudget
+        BudgetDisplay.textContent = "Balance: $" + userBudget;
     } else {
+        //if a budget has yet to be declared just make it 0
         BudgetDisplay.textContent = "Balance: $" + "0";
     }
 }
