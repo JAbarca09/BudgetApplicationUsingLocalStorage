@@ -29,6 +29,12 @@ EnterBudgetBtn.addEventListener('click', function (e) {
             alertToast.classList.remove("show");
         }, 10000);
         alertToast.classList.add("show");
+    } else if(EnterBudget.value.length > 9) {
+        alertToastContent.textContent = "Enter a valid budget between 1 - 999999999";
+        setTimeout(() => {
+            alertToast.classList.remove("show");
+        }, 10000);
+        alertToast.classList.add("show");
     } else {
         BudgetDisplay.textContent = "Balance: $" + EnterBudget.value;
         SaveBudgetToLocalStorage(EnterBudget.value);
@@ -36,6 +42,7 @@ EnterBudgetBtn.addEventListener('click', function (e) {
         // EnterBudgetBtn.classList.add("removeFromDOM");
         EnterBudgetBtn.disabled = true;
         EnterBudget.disabled = true;
+
     }
 });
 
@@ -115,12 +122,19 @@ EnterExpenseBtn.addEventListener('click', function (e) {
             alertToast.classList.remove("show");
         }, 10000);
         alertToast.classList.add("show");
+    } else if(EnterExpense.value.length > 9) {
+        alertToastContent.textContent = "Enter valid expenses between 1 - 999999999";
+        setTimeout(() => {
+            alertToast.classList.remove("show");
+        }, 10000);
+        alertToast.classList.add("show");
     } else {
         AddAnotherExpenseToLocalStorage(EnterExpense.value);
         AddAnotherVendorToLocalStorage(EnterVendor.value);
         CreateElement(EnterExpense.value, EnterVendor.value);
         budget = CalculateRemainingBudget(budget, EnterExpense.value);
         DisplayOverallExpenses();
+
     }
 });
 
