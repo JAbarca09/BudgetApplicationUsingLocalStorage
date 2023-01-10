@@ -80,10 +80,8 @@ EnterExpenseBtn.addEventListener('click', function (e) {
         AddAnotherExpenseToLocalStorage(roundedExpense.toString()); //Adding values to local storage need to be a string!
         AddAnotherVendorToLocalStorage(EnterVendor.value);
         CreateElement(roundedExpense.toString(), EnterVendor.value);
-        //check the value of budget to see if it is well?
         budget = CalculateRemainingBudget(budget, roundedExpense);
         DisplayOverallExpenses();
-
     }
 });
 
@@ -109,8 +107,9 @@ function DisplayOverallExpenses() {
 
 function CalculateRemainingBudget(userBudget, Expense) {
     //if you do not update the original budget, it will always subtract the original budget the user entered from the expense and will be bugged!
-    let remainingBudget = parseInt(userBudget) - parseInt(Expense);
-    BudgetDisplay.textContent = "Balance: $" + remainingBudget;
+    let remainingBudget = Math.round((Number(userBudget) - Expense) * 100) / 100;
+    BudgetDisplay.textContent = "Balance: $" + remainingBudget.toFixed(2);
+    console.log(remainingBudget);
     return remainingBudget;
 }
 
