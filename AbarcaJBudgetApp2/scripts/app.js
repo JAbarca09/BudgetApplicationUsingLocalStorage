@@ -99,10 +99,10 @@ function DisplayOverallExpenses() {
     console.log(allExpenses);
     for (let i = 0; i < allExpenses.length; i++) {
         //convert all the strings to an int and pass them to another array!
-        sum = parseInt(allExpenses[i]) + sum;
+        sum = Number(allExpenses[i]) + sum;
     }
 
-    DisplayExpenses.textContent = "Expenses: $" + sum;
+    DisplayExpenses.textContent = "Expenses: $" + sum.toFixed(2);
 }
 
 function CalculateRemainingBudget(userBudget, Expense) {
