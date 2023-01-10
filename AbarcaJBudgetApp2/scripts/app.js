@@ -37,7 +37,7 @@ EnterBudgetBtn.addEventListener('click', function (e) {
         alertToast.classList.add("show");
     } else {
         BudgetDisplay.textContent = "Balance: $" + roundedBudget;
-        SaveBudgetToLocalStorage(roundedBudget);
+        SaveBudgetToLocalStorage(roundedBudget.toString()); //Adding values to local storage need to be a string!
         budget = GetUserBudget();
         EnterBudgetBtn.disabled = true;
         EnterBudget.disabled = true;
@@ -48,6 +48,7 @@ EnterBudgetBtn.addEventListener('click', function (e) {
 EnterExpenseBtn.addEventListener('click', function (e) {
     //Check if there is a valid budget before the expense is added!
     let checkBudget = GetUserBudget();
+    let roundedExpense = Math.round(EnterExpense.value * 100) / 100;
     if (checkBudget === null) {
         //if the budget is null that means there is not one!
         alertToastContent.textContent = "Enter a budget before adding expenses";
@@ -76,10 +77,11 @@ EnterExpenseBtn.addEventListener('click', function (e) {
         }, 10000);
         alertToast.classList.add("show");
     } else {
-        AddAnotherExpenseToLocalStorage(EnterExpense.value);
+        AddAnotherExpenseToLocalStorage(roundedExpense.toString()); //Adding values to local storage need to be a string!
         AddAnotherVendorToLocalStorage(EnterVendor.value);
-        CreateElement(EnterExpense.value, EnterVendor.value);
-        budget = CalculateRemainingBudget(budget, EnterExpense.value);
+        CreateElement(roundedExpense.toString(), EnterVendor.value);
+        //check the value of budget to see if it is well?
+        budget = CalculateRemainingBudget(budget, roundedExpense);
         DisplayOverallExpenses();
 
     }
