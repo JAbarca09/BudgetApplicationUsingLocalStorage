@@ -120,7 +120,6 @@ function CalculateRemainingBudgetOnStart() {
     // budget = GetUserBudget(); GETTING THE BUDGET ON START MIGHT GET US CLOSE TO FIXING BUG!
     let culmulativeExpenses = GetUserExpensesFromLocalStorage();
     console.log(culmulativeExpenses);
-    console.log(userBudget);
     if (culmulativeExpenses.length > 0) {
         let expensesSum = 0;
         for (let i = 0; i < culmulativeExpenses.length; i++) {
@@ -131,7 +130,7 @@ function CalculateRemainingBudgetOnStart() {
         return remainingBudget;
     } else if (userBudget != null) {
         //if a budget is declared but there are no expenses the budget remaining is the userBudget
-        BudgetDisplay.textContent = "Balance: $" + userBudget;
+        BudgetDisplay.textContent = "Balance: $" + Number(userBudget).toFixed(2);
     } else {
         //if a budget has yet to be declared just make it 0
         BudgetDisplay.textContent = "Balance: $" + "0.00";
@@ -152,7 +151,7 @@ function CreateElement(Cost, Vendor) {
 
     cardRow.className = "d-flex justify-content-center"
     Expense.className = "col-6 mt-2"
-    Expense.textContent = "$" + Cost + ", " + Vendor;
+    Expense.textContent = "$" + Number(Cost).toFixed(2) + ", " + Vendor;
     DeleteButton.className = "col-2 btn btn-primary";
     DeleteButton.textContent = "X";
 
@@ -179,12 +178,13 @@ function CreateElement(Cost, Vendor) {
 
             //get the total expenses
             for (let i = 0; i < tempExpenses.length; i++) {
-                totalExpenses += parseInt(tempExpenses[i]);
+                totalExpenses += Number(tempExpenses[i]);
             }
-            currentBal = (parseInt(OverallBudget) - totalExpenses) + parseInt(Cost);
-            BudgetDisplay.textContent = "Balance: $" + currentBal;
+            currentBal = (Number(OverallBudget) - totalExpenses) + Cost;
+            BudgetDisplay.textContent = "Balance: $" + currentBal.toFixed(2);
             firstTimeRun = true;
         } else {
+            //page was not refreshed
             //budget is a number, Cost is a string
             budget = CalculateReminbursementBudget(budget, Cost);
         }
