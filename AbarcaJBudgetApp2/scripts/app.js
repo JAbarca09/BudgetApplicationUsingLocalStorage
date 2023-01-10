@@ -183,7 +183,7 @@ function CreateElement(Cost, Vendor) {
             BudgetDisplay.textContent = "Balance: $" + currentBal;
             firstTimeRun = true;
         } else {
-            //page was not refreshed
+            //budget is a number, Cost is a string
             budget = CalculateReminbursementBudget(budget, Cost);
         }
         RemoveExpenseFromLocalStorage(Cost.toString());
@@ -201,9 +201,8 @@ function CalculateReminbursementBudget(userBudget, reimbursement) {
     //what if the user does not enter a budget or amounts on refresh, you have to do the calculations from local storage
     // let usersBudgetLocalStorage = GetUserBudget();
 
-
-    let remainingBudget = parseInt(userBudget) + parseInt(reimbursement);
-    BudgetDisplay.textContent = "Balance: $" + remainingBudget;
+    let remainingBudget = userBudget + Number(reimbursement);
+    BudgetDisplay.textContent = "Balance: $" + remainingBudget.toFixed(2);
     console.log(remainingBudget);
     return remainingBudget;
 }
