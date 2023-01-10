@@ -173,7 +173,7 @@ function CreateElement(Cost, Vendor) {
 
         //check if the page was refreshed, if it was the input field is an empty string!
         //should only run for the first value once
-        if (EnterBudget.value === "" || firstTimeRun === false) {
+        if (EnterBudget.value === "" && firstTimeRun === false) {
             //page was refreshed
             let OverallBudget = GetUserBudget();
 
