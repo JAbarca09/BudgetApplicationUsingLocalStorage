@@ -29,7 +29,7 @@ EnterBudgetBtn.addEventListener('click', function (e) {
             alertToast.classList.remove("show");
         }, 10000);
         alertToast.classList.add("show");
-    } else if(EnterBudget.value.length > 9) {
+    } else if (EnterBudget.value.length > 9) {
         alertToastContent.textContent = "Enter a valid budget between 1 - 999999999";
         setTimeout(() => {
             alertToast.classList.remove("show");
@@ -122,7 +122,7 @@ EnterExpenseBtn.addEventListener('click', function (e) {
             alertToast.classList.remove("show");
         }, 10000);
         alertToast.classList.add("show");
-    } else if(EnterExpense.value.length > 9) {
+    } else if (EnterExpense.value.length > 9) {
         alertToastContent.textContent = "Enter valid expenses between 1 - 999999999";
         setTimeout(() => {
             alertToast.classList.remove("show");
@@ -173,7 +173,7 @@ function CreateElement(Cost, Vendor) {
 
         //check if the page was refreshed, if it was the input field is an empty string!
         //should only run for the first value once
-        if (EnterBudget.value === "" || firstTimeRun === false) {
+        if (EnterBudget.value === "" && firstTimeRun === false) {
             //page was refreshed
             let OverallBudget = GetUserBudget();
 
@@ -229,29 +229,6 @@ function CheckForLocalStorageDisplayIt() {
 
 }
 
-
-function FormatDollarAmount(amount){
-    //check if the dollar amount is valid!
-    //toFixed() method turns data values into strings!
-    //Number() method turns strings into numbers if possible
-    let regex = /^\d+(?:\.\d{0,2})$/;
-    let didNumberPass = true;
-    console.log(Number(amount).toFixed(2));
-
-    if(regex.test(Number(amount).toFixed(2))){
-        console.log('Number passes')
-
-    } else {
-        console.log('Number fails');
-        didNumberPass = false
-        alertToastContent.textContent = "Enter a valid dollar amount";
-        setTimeout(() => {
-            alertToast.classList.remove("show");
-        }, 10000);
-        alertToast.classList.add("show");
-    }
-    return Number(amount).toFixed(2);
-}
 
 //resend the budget again to the like the user has to 
 
