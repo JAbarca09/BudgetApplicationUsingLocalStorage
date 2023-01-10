@@ -45,6 +45,46 @@ EnterBudgetBtn.addEventListener('click', function (e) {
     }
 });
 
+EnterExpenseBtn.addEventListener('click', function (e) {
+    //Check if there is a valid budget before the expense is added!
+    let checkBudget = GetUserBudget();
+    if (checkBudget === null) {
+        //if the budget is null that means there is not one!
+        alertToastContent.textContent = "Enter a budget before adding expenses";
+        setTimeout(() => {
+            alertToast.classList.remove("show");
+        }, 10000);
+        alertToast.classList.add("show");
+    }
+    else if (EnterVendor.value.length <= 0) {
+        alertToastContent.textContent = "Enter a valid vendor";
+        setTimeout(() => {
+            alertToast.classList.remove("show");
+        }, 10000);
+        alertToast.classList.add("show");
+    }
+    else if (EnterExpense.value < 0 || EnterExpense.value.length <= 0) {
+        alertToastContent.textContent = "Enter a valid expense";
+        setTimeout(() => {
+            alertToast.classList.remove("show");
+        }, 10000);
+        alertToast.classList.add("show");
+    } else if (EnterExpense.value.length > 9) {
+        alertToastContent.textContent = "Enter valid expenses between 1 - 999999999";
+        setTimeout(() => {
+            alertToast.classList.remove("show");
+        }, 10000);
+        alertToast.classList.add("show");
+    } else {
+        AddAnotherExpenseToLocalStorage(EnterExpense.value);
+        AddAnotherVendorToLocalStorage(EnterVendor.value);
+        CreateElement(EnterExpense.value, EnterVendor.value);
+        budget = CalculateRemainingBudget(budget, EnterExpense.value);
+        DisplayOverallExpenses();
+
+    }
+});
+
 //this clears local storage and refreshes the page!
 resetBtn.addEventListener('click', function () {
     localStorage.clear();
@@ -95,48 +135,6 @@ function CalculateRemainingBudgetOnStart() {
         BudgetDisplay.textContent = "Balance: $" + "0";
     }
 }
-
-
-EnterExpenseBtn.addEventListener('click', function (e) {
-    //Check if there is a valid budget before the expense is added!
-    let checkBudget = GetUserBudget();
-    if (checkBudget === null) {
-        //if the budget is null that means there is not one!
-        alertToastContent.textContent = "Enter a budget before adding expenses";
-        setTimeout(() => {
-            alertToast.classList.remove("show");
-        }, 10000);
-        alertToast.classList.add("show");
-    }
-    else if (EnterVendor.value.length <= 0) {
-        alertToastContent.textContent = "Enter a valid vendor";
-        setTimeout(() => {
-            alertToast.classList.remove("show");
-        }, 10000);
-        alertToast.classList.add("show");
-    }
-    else if (EnterExpense.value < 0 || EnterExpense.value.length <= 0) {
-        alertToastContent.textContent = "Enter a valid expense";
-        setTimeout(() => {
-            alertToast.classList.remove("show");
-        }, 10000);
-        alertToast.classList.add("show");
-    } else if (EnterExpense.value.length > 9) {
-        alertToastContent.textContent = "Enter valid expenses between 1 - 999999999";
-        setTimeout(() => {
-            alertToast.classList.remove("show");
-        }, 10000);
-        alertToast.classList.add("show");
-    } else {
-        AddAnotherExpenseToLocalStorage(EnterExpense.value);
-        AddAnotherVendorToLocalStorage(EnterVendor.value);
-        CreateElement(EnterExpense.value, EnterVendor.value);
-        budget = CalculateRemainingBudget(budget, EnterExpense.value);
-        DisplayOverallExpenses();
-
-    }
-});
-
 
 
 function CreateElement(Cost, Vendor) {
