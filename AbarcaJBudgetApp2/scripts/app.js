@@ -21,7 +21,7 @@ budget !== null ? EnterBudget.disabled = true : EnterBudget.disabled = false;
 
 EnterBudgetBtn.addEventListener('click', function (e) {
     // console.log(EnterBudget.value);
-
+    let roundedBudget = Math.round(EnterBudget.value * 100) / 100;
     if (EnterBudget.value < 0 || EnterBudget.value === 0 || EnterBudget.value.length <= 0) {
         //alert toast pops out
         alertToastContent.textContent = "Enter a valid budget";
@@ -36,10 +36,9 @@ EnterBudgetBtn.addEventListener('click', function (e) {
         }, 10000);
         alertToast.classList.add("show");
     } else {
-        BudgetDisplay.textContent = "Balance: $" + EnterBudget.value;
-        SaveBudgetToLocalStorage(EnterBudget.value);
+        BudgetDisplay.textContent = "Balance: $" + roundedBudget;
+        SaveBudgetToLocalStorage(roundedBudget);
         budget = GetUserBudget();
-        // EnterBudgetBtn.classList.add("removeFromDOM");
         EnterBudgetBtn.disabled = true;
         EnterBudget.disabled = true;
 
