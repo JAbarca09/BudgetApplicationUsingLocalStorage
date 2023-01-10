@@ -169,12 +169,13 @@ function CreateElement(Cost, Vendor) {
         let currentBal = 0;
         let firstTimeRun = false;
         console.log(tempExpenses);
-
+        console.log(Cost);
         //check if the page was refreshed, if it was the input field is an empty string!
         //should only run for the first value once
         if (EnterBudget.value === "" && firstTimeRun === false) {
             //page was refreshed
             let OverallBudget = GetUserBudget();
+            console.log(OverallBudget);
 
             //get the total expenses
             for (let i = 0; i < tempExpenses.length; i++) {
@@ -212,14 +213,13 @@ function CalculateReminbursementBudget(userBudget, reimbursement) {
 
 //get Local Storage when the application begins!
 function CheckForLocalStorageDisplayIt() {
-    // let userBudget = GetUserBudget();
     let vendors = GetVendorsFromLocalStorage();
     let userExpenses = GetUserExpensesFromLocalStorage();
 
     //I need a for loop that goes through both the vendors and userExpenses at the same time to create the elements when the page is refreshed!
     let j = 0;
     for (let i = 0; i < vendors.length; i++) {
-        CreateElement(parseInt(userExpenses[i]), vendors[j]);
+        CreateElement(Number(userExpenses[i]), vendors[j]);
         j++;
     }
 
