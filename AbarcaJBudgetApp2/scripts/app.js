@@ -145,7 +145,7 @@ function CreateElement(Cost, Vendor) {
     let Expense = document.createElement('div');
     let DeleteButton = document.createElement('button');
 
-    card.id = Vendor+Cost;
+    card.id = Vendor + Cost;
     card.className = "card";
     cardBody.className = "card-body";
 
@@ -190,7 +190,7 @@ function CreateElement(Cost, Vendor) {
         RemoveExpenseFromLocalStorage(Cost.toString());
         RemoveVendorFromLocalStorage(Vendor);
         //To determine which element is removed from the DOM it uses the name of the vendor, but in case the vendors are the same name the computer has trouble determining which element to remove from the DOM
-        document.getElementById(Vendor+Cost).remove();
+        document.getElementById(Vendor + Cost).remove();
         //UPDATE THE OVERALL EXPENSES OF THE USER after deleting an object occurs!
         DisplayOverallExpenses();
     });
