@@ -21,7 +21,7 @@ budget !== null ? EnterBudget.disabled = true : EnterBudget.disabled = false;
 
 EnterBudgetBtn.addEventListener('click', function (e) {
     // console.log(EnterBudget.value);
-
+    let roundedBudget = Math.round(EnterBudget.value * 100) / 100;
     if (EnterBudget.value < 0 || EnterBudget.value === 0 || EnterBudget.value.length <= 0) {
         //alert toast pops out
         alertToastContent.textContent = "Enter a valid budget";
@@ -36,71 +36,19 @@ EnterBudgetBtn.addEventListener('click', function (e) {
         }, 10000);
         alertToast.classList.add("show");
     } else {
-        BudgetDisplay.textContent = "Balance: $" + EnterBudget.value;
-        SaveBudgetToLocalStorage(EnterBudget.value);
+        BudgetDisplay.textContent = "Balance: $" + roundedBudget;
+        SaveBudgetToLocalStorage(roundedBudget.toString()); //Adding values to local storage need to be a string!
         budget = GetUserBudget();
-        // EnterBudgetBtn.classList.add("removeFromDOM");
         EnterBudgetBtn.disabled = true;
         EnterBudget.disabled = true;
 
     }
 });
 
-//this clears local storage and refreshes the page!
-resetBtn.addEventListener('click', function () {
-    localStorage.clear();
-    window.location.reload();
-    EnterBudgetBtn.disabled = false;
-    EnterBudget.disabled = false;
-});
-
-function DisplayOverallExpenses() {
-    let sum = 0;
-    let allExpenses = GetUserExpensesFromLocalStorage();
-    console.log(allExpenses);
-    for (let i = 0; i < allExpenses.length; i++) {
-        //convert all the strings to an int and pass them to another array!
-        sum = parseInt(allExpenses[i]) + sum;
-    }
-
-    DisplayExpenses.textContent = "Expenses: $" + sum;
-}
-
-function CalculateRemainingBudget(userBudget, Expense) {
-    //if you do not update the original budget, it will always subtract the original budget the user entered from the expense and will be bugged!
-    let remainingBudget = parseInt(userBudget) - parseInt(Expense);
-    BudgetDisplay.textContent = "Balance: $" + remainingBudget;
-    return remainingBudget;
-}
-
-function CalculateRemainingBudgetOnStart() {
-
-    //take the original budget, subtract it from the sum of the expenses
-    let userBudget = GetUserBudget();
-    // budget = GetUserBudget(); GETTING THE BUDGET ON START MIGHT GET US CLOSE TO FIXING BUG!
-    let culmulativeExpenses = GetUserExpensesFromLocalStorage();
-
-    if (culmulativeExpenses.length > 0) {
-        let expensesSum = 0;
-        for (let i = 0; i < culmulativeExpenses.length; i++) {
-            expensesSum = parseInt(culmulativeExpenses[i]) + expensesSum;
-        }
-        let remainingBudget = parseInt(userBudget) - expensesSum;
-        BudgetDisplay.textContent = "Balance: $" + remainingBudget;
-        return remainingBudget;
-    } else if (userBudget != null) {
-        //if a budget is declared but there are no expenses the budget remaining is the userBudget
-        BudgetDisplay.textContent = "Balance: $" + userBudget;
-    } else {
-        //if a budget has yet to be declared just make it 0
-        BudgetDisplay.textContent = "Balance: $" + "0";
-    }
-}
-
-
 EnterExpenseBtn.addEventListener('click', function (e) {
     //Check if there is a valid budget before the expense is added!
     let checkBudget = GetUserBudget();
+    let roundedExpense = Math.round(EnterExpense.value * 100) / 100;
     if (checkBudget === null) {
         //if the budget is null that means there is not one!
         alertToastContent.textContent = "Enter a budget before adding expenses";
@@ -129,15 +77,65 @@ EnterExpenseBtn.addEventListener('click', function (e) {
         }, 10000);
         alertToast.classList.add("show");
     } else {
-        AddAnotherExpenseToLocalStorage(EnterExpense.value);
+        AddAnotherExpenseToLocalStorage(roundedExpense.toString()); //Adding values to local storage need to be a string!
         AddAnotherVendorToLocalStorage(EnterVendor.value);
-        CreateElement(EnterExpense.value, EnterVendor.value);
-        budget = CalculateRemainingBudget(budget, EnterExpense.value);
+        CreateElement(roundedExpense.toString(), EnterVendor.value);
+        budget = CalculateRemainingBudget(budget, roundedExpense);
         DisplayOverallExpenses();
-
     }
 });
 
+//this clears local storage and refreshes the page!
+resetBtn.addEventListener('click', function () {
+    localStorage.clear();
+    window.location.reload();
+    EnterBudgetBtn.disabled = false;
+    EnterBudget.disabled = false;
+});
+
+function DisplayOverallExpenses() {
+    let sum = 0;
+    let allExpenses = GetUserExpensesFromLocalStorage();
+    console.log(allExpenses);
+    for (let i = 0; i < allExpenses.length; i++) {
+        //convert all the strings to an int and pass them to another array!
+        sum = Number(allExpenses[i]) + sum;
+    }
+
+    DisplayExpenses.textContent = "Expenses: $" + sum.toFixed(2);
+}
+
+function CalculateRemainingBudget(userBudget, Expense) {
+    //if you do not update the original budget, it will always subtract the original budget the user entered from the expense and will be bugged!
+    let remainingBudget = Math.round((Number(userBudget) - Expense) * 100) / 100;
+    BudgetDisplay.textContent = "Balance: $" + remainingBudget.toFixed(2);
+    console.log(remainingBudget);
+    return remainingBudget;
+}
+
+function CalculateRemainingBudgetOnStart() {
+
+    //take the original budget, subtract it from the sum of the expenses
+    let userBudget = GetUserBudget();
+    // budget = GetUserBudget(); GETTING THE BUDGET ON START MIGHT GET US CLOSE TO FIXING BUG!
+    let culmulativeExpenses = GetUserExpensesFromLocalStorage();
+    console.log(culmulativeExpenses);
+    if (culmulativeExpenses.length > 0) {
+        let expensesSum = 0;
+        for (let i = 0; i < culmulativeExpenses.length; i++) {
+            expensesSum += Number(culmulativeExpenses[i]);
+        }
+        let remainingBudget = Number(userBudget) - expensesSum;
+        BudgetDisplay.textContent = "Balance: $" + remainingBudget.toFixed(2);
+        return remainingBudget;
+    } else if (userBudget != null) {
+        //if a budget is declared but there are no expenses the budget remaining is the userBudget
+        BudgetDisplay.textContent = "Balance: $" + Number(userBudget).toFixed(2);
+    } else {
+        //if a budget has yet to be declared just make it 0
+        BudgetDisplay.textContent = "Balance: $" + "0.00";
+    }
+}
 
 
 function CreateElement(Cost, Vendor) {
@@ -153,7 +151,7 @@ function CreateElement(Cost, Vendor) {
 
     cardRow.className = "d-flex justify-content-center"
     Expense.className = "col-6 mt-2"
-    Expense.textContent = "$" + Cost + ", " + Vendor;
+    Expense.textContent = "$" + Number(Cost).toFixed(2) + ", " + Vendor;
     DeleteButton.className = "col-2 btn btn-primary";
     DeleteButton.textContent = "X";
 
@@ -170,22 +168,24 @@ function CreateElement(Cost, Vendor) {
         let currentBal = 0;
         let firstTimeRun = false;
         console.log(tempExpenses);
-
+        console.log(Cost);
         //check if the page was refreshed, if it was the input field is an empty string!
         //should only run for the first value once
         if (EnterBudget.value === "" && firstTimeRun === false) {
             //page was refreshed
             let OverallBudget = GetUserBudget();
+            console.log(OverallBudget);
 
             //get the total expenses
             for (let i = 0; i < tempExpenses.length; i++) {
-                totalExpenses += parseInt(tempExpenses[i]);
+                totalExpenses += Number(tempExpenses[i]);
             }
-            currentBal = (parseInt(OverallBudget) - totalExpenses) + parseInt(Cost);
-            BudgetDisplay.textContent = "Balance: $" + currentBal;
+            currentBal = (Number(OverallBudget) - totalExpenses) + Cost;
+            BudgetDisplay.textContent = "Balance: $" + currentBal.toFixed(2);
             firstTimeRun = true;
         } else {
             //page was not refreshed
+            //budget is a number, Cost is a string
             budget = CalculateReminbursementBudget(budget, Cost);
         }
         RemoveExpenseFromLocalStorage(Cost.toString());
@@ -203,9 +203,8 @@ function CalculateReminbursementBudget(userBudget, reimbursement) {
     //what if the user does not enter a budget or amounts on refresh, you have to do the calculations from local storage
     // let usersBudgetLocalStorage = GetUserBudget();
 
-
-    let remainingBudget = parseInt(userBudget) + parseInt(reimbursement);
-    BudgetDisplay.textContent = "Balance: $" + remainingBudget;
+    let remainingBudget = userBudget + Number(reimbursement);
+    BudgetDisplay.textContent = "Balance: $" + remainingBudget.toFixed(2);
     console.log(remainingBudget);
     return remainingBudget;
 }
@@ -214,14 +213,13 @@ function CalculateReminbursementBudget(userBudget, reimbursement) {
 
 //get Local Storage when the application begins!
 function CheckForLocalStorageDisplayIt() {
-    // let userBudget = GetUserBudget();
     let vendors = GetVendorsFromLocalStorage();
     let userExpenses = GetUserExpensesFromLocalStorage();
 
     //I need a for loop that goes through both the vendors and userExpenses at the same time to create the elements when the page is refreshed!
     let j = 0;
     for (let i = 0; i < vendors.length; i++) {
-        CreateElement(parseInt(userExpenses[i]), vendors[j]);
+        CreateElement(Number(userExpenses[i]), vendors[j]);
         j++;
     }
 
