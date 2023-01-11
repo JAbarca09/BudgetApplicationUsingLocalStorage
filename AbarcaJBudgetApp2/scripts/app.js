@@ -145,7 +145,7 @@ function CreateElement(Cost, Vendor) {
     let Expense = document.createElement('div');
     let DeleteButton = document.createElement('button');
 
-    card.id = Vendor;
+    card.id = Vendor+Cost;
     card.className = "card";
     cardBody.className = "card-body";
 
@@ -167,7 +167,6 @@ function CreateElement(Cost, Vendor) {
         let totalExpenses = 0;
         let currentBal = 0;
         let firstTimeRun = false;
-        console.log(tempExpenses);
         console.log(Cost);
         //check if the page was refreshed, if it was the input field is an empty string!
         //should only run for the first value once
@@ -190,7 +189,8 @@ function CreateElement(Cost, Vendor) {
         }
         RemoveExpenseFromLocalStorage(Cost.toString());
         RemoveVendorFromLocalStorage(Vendor);
-        document.getElementById(Vendor).remove();
+        //To determine which element is removed from the DOM it uses the name of the vendor, but in case the vendors are the same name the computer has trouble determining which element to remove from the DOM
+        document.getElementById(Vendor+Cost).remove();
         //UPDATE THE OVERALL EXPENSES OF THE USER after deleting an object occurs!
         DisplayOverallExpenses();
     });
