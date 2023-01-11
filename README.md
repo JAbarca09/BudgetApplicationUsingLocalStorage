@@ -7,4 +7,5 @@ This is a budget mobile web application using JavaScript Local storage.
     * Also consider decimal values: $123.23
         * Try rounding ex. num = Math.round(val * 100) / 100 this gets a number with a decimal value in the hundredths place!
 * Issue with multiple expenses, removing them adds up to the balance incorrectly not sure why?
+    * When removing expenses after a budget is inputted, it seems to be removing the wrong one.
     * This occurred aftering updating the application by including rounding!
