@@ -30,7 +30,7 @@ EnterBudgetBtn.addEventListener('click', function (e) {
         }, 10000);
         alertToast.classList.add("show");
     } else if (EnterBudget.value.length > 9) {
-        alertToastContent.textContent = "Enter a valid budget between 1 - 999999999";
+        alertToastContent.textContent = "Enter a valid budget less than 9 digits";
         setTimeout(() => {
             alertToast.classList.remove("show");
         }, 10000);
@@ -71,7 +71,7 @@ EnterExpenseBtn.addEventListener('click', function (e) {
         }, 10000);
         alertToast.classList.add("show");
     } else if (EnterExpense.value.length > 9) {
-        alertToastContent.textContent = "Enter valid expenses between 1 - 999999999";
+        alertToastContent.textContent = "Enter a valid budget less than 9 digits";;
         setTimeout(() => {
             alertToast.classList.remove("show");
         }, 10000);
