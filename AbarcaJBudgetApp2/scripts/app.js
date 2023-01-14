@@ -153,7 +153,7 @@ function CreateElement(Cost, Vendor) {
     Expense.className = "col-6 mt-2"
     Expense.textContent = "$" + Number(Cost).toFixed(2) + ", " + Vendor;
     DeleteButton.className = "col-2 btn btn-primary";
-    DeleteButton.textContent = "X";
+    DeleteButton.innerHTML = "<img src=\"../images/delete.png\" width=\"50%\" height=\"100%\" >";
 
     cardRow.appendChild(Expense);
     cardRow.appendChild(DeleteButton);

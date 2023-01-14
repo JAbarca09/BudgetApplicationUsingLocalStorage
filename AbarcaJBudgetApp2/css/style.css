@@ -14,3 +14,13 @@ h1{
 .card {
     margin-bottom: 10px;
 }
+
+.col-2.btn.btn-primary {
+    background-color: #7A7AFF;
+    border-color: #7A7AFF;
+}
+
+.col-2.btn.btn-primary:hover {
+    background-color: #A8A8FF;
+    border-color: #A8A8FF;
+}
