@@ -36,7 +36,7 @@ EnterBudgetBtn.addEventListener('click', function (e) {
         }, 10000);
         alertToast.classList.add("show");
     } else {
-        BudgetDisplay.textContent = "Balance: $" + roundedBudget;
+        BudgetDisplay.textContent = "Balance: $" + roundedBudget.toFixed(2);
         SaveBudgetToLocalStorage(roundedBudget.toString()); //Adding values to local storage need to be a string!
         budget = GetUserBudget();
         EnterBudgetBtn.disabled = true;
@@ -153,7 +153,7 @@ function CreateElement(Cost, Vendor) {
     Expense.className = "col-6 mt-2"
     Expense.textContent = "$" + Number(Cost).toFixed(2) + ", " + Vendor;
     DeleteButton.className = "col-2 btn btn-primary";
-    DeleteButton.textContent = "X";
+    DeleteButton.innerHTML = "<img src=\"../images/delete.png\" width=\"28px\" height=\"29px\" alt=\"remove expense garbage can icon\">";
 
     cardRow.appendChild(Expense);
     cardRow.appendChild(DeleteButton);
