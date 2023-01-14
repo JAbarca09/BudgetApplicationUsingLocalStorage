@@ -36,7 +36,7 @@ EnterBudgetBtn.addEventListener('click', function (e) {
         }, 10000);
         alertToast.classList.add("show");
     } else {
-        BudgetDisplay.textContent = "Balance: $" + roundedBudget;
+        BudgetDisplay.textContent = "Balance: $" + roundedBudget.toFixed(2);
         SaveBudgetToLocalStorage(roundedBudget.toString()); //Adding values to local storage need to be a string!
         budget = GetUserBudget();
         EnterBudgetBtn.disabled = true;
