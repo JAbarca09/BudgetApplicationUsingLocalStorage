@@ -1,5 +1,6 @@
 body{
     background-color: black;
+    font-family: 'Roboto', sans-serif;
 }
 
 .container {
@@ -7,7 +8,8 @@ body{
 }
 
 h1{
-    color: white
+    color: white;
+    font-size: 35px;
 }
 
 .DisplayTxt{
@@ -27,4 +29,10 @@ h1{
 .col-2.btn.btn-primary:hover {
     background-color: #A8A8FF;
     border-color: #A8A8FF;
+}
+
+.btn:disabled {
+    background-color: #024AB6;
+    border-color: #024AB6;
+    opacity: 0.9;
 }
