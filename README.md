@@ -2,5 +2,4 @@
 This is a budget mobile web application using JavaScript Local storage.
 
 ## Bugs To Be Fixed
-    * Also consider decimal values: $123.23
-        * Try rounding ex. num = Math.round(val * 100) / 100 this gets a number with a decimal value in the hundredths place!
+* Error messages should be placed somewhere  else because if there are too many expenses the user will not see an error message appear!
