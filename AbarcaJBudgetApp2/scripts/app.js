@@ -151,7 +151,7 @@ function CreateElement(Cost, Vendor) {
 
     cardRow.className = "d-flex justify-content-center"
     Expense.className = "col-6 mt-2"
-    Expense.textContent = "$" + Number(Cost).toFixed(2) + ", " + Vendor;
+    Expense.textContent = "$" + Number(Cost).toFixed(2) + " | " + Vendor;
     DeleteButton.className = "col-2 btn btn-primary";
     DeleteButton.innerHTML = "<img src=\"../images/delete.png\" width=\"28px\" height=\"29px\" alt=\"remove expense garbage can icon\">";
 
