@@ -114,9 +114,8 @@ function CalculateRemainingBudget(userBudget, Expense) {
 }
 
 function CalculateRemainingBudgetOnStart() {
-
     //take the original budget, subtract it from the sum of the expenses
-    let userBudget = GetUserBudget();
+    budget = GetUserBudget();
     // budget = GetUserBudget(); GETTING THE BUDGET ON START MIGHT GET US CLOSE TO FIXING BUG!
     let culmulativeExpenses = GetUserExpensesFromLocalStorage();
     console.log(culmulativeExpenses);
@@ -125,12 +124,13 @@ function CalculateRemainingBudgetOnStart() {
         for (let i = 0; i < culmulativeExpenses.length; i++) {
             expensesSum += Number(culmulativeExpenses[i]);
         }
-        let remainingBudget = Number(userBudget) - expensesSum;
+        let remainingBudget = Number(budget) - expensesSum;
         BudgetDisplay.textContent = "Balance: $" + remainingBudget.toFixed(2);
+        budget = remainingBudget;
         return remainingBudget;
-    } else if (userBudget != null) {
+    } else if (budget != null) {
         //if a budget is declared but there are no expenses the budget remaining is the userBudget
-        BudgetDisplay.textContent = "Balance: $" + Number(userBudget).toFixed(2);
+        BudgetDisplay.textContent = "Balance: $" + Number(budget).toFixed(2);
     } else {
         //if a budget has yet to be declared just make it 0
         BudgetDisplay.textContent = "Balance: $" + "0.00";
