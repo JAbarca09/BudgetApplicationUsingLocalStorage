@@ -16,6 +16,10 @@ h1{
     font-size: 35px;
 }
 
+#EnterBudgetBtn {
+    width: 100%;
+}
+
 .DisplayTxt{
     font-size: 1.5rem;
     color: white;
