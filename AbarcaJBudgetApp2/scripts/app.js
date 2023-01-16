@@ -180,7 +180,7 @@ function CreateElement(Cost, Vendor) {
                 totalExpenses += Number(tempExpenses[i]);
             }
             currentBal = (Number(OverallBudget) - totalExpenses) + Cost;
-            BudgetDisplay.textContent = "Balance: $" + currentBal.toFixed(2);
+            BudgetDisplay.textContent = "Balance: $" + Number(currentBal).toFixed(2);
             firstTimeRun = true;
         } else {
             //page was not refreshed
