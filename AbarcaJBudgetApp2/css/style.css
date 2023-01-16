@@ -1,4 +1,8 @@
 body{
+    background: linear-gradient(45deg, rgba(26,12,172,1) 14%, rgba(20,20,78,1) 81%);
+    height: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     background-color: black;
     font-family: 'Roboto', sans-serif;
 }
@@ -36,3 +40,4 @@ h1{
     border-color: #024AB6;
     opacity: 0.9;
 }
+
