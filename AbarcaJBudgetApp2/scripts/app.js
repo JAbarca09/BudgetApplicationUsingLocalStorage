@@ -82,6 +82,10 @@ EnterExpenseBtn.addEventListener('click', function (e) {
         CreateElement(roundedExpense.toString(), EnterVendor.value);
         budget = CalculateRemainingBudget(budget, roundedExpense);
         DisplayOverallExpenses();
+
+        //After the Expense and vendor is added clear it!
+        EnterExpense.value = "";
+        EnterVendor.value = "";
     }
 });
 
