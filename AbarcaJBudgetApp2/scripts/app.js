@@ -171,19 +171,17 @@ function CreateElement(Cost, Vendor) {
         let totalExpenses = 0;
         let currentBal = 0;
         let firstTimeRun = false;
-        console.log(Cost);
         //check if the page was refreshed, if it was the input field is an empty string!
         //should only run for the first value once
         if (EnterBudget.value === "" && firstTimeRun === false) {
             //page was refreshed
-            let OverallBudget = GetUserBudget();
-            console.log(OverallBudget);
+            let OverallBudget = Number(GetUserBudget());
 
             //get the total expenses
             for (let i = 0; i < tempExpenses.length; i++) {
                 totalExpenses += Number(tempExpenses[i]);
             }
-            currentBal = (Number(OverallBudget) - totalExpenses) + Cost;
+            currentBal = (OverallBudget - totalExpenses) + Number(Cost);
             console.log(currentBal);
             BudgetDisplay.textContent = "Balance: $" + Number(currentBal).toFixed(2);
             firstTimeRun = true;
