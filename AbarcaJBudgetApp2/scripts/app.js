@@ -184,6 +184,7 @@ function CreateElement(Cost, Vendor) {
                 totalExpenses += Number(tempExpenses[i]);
             }
             currentBal = (Number(OverallBudget) - totalExpenses) + Cost;
+            console.log(currentBal);
             BudgetDisplay.textContent = "Balance: $" + Number(currentBal).toFixed(2);
             firstTimeRun = true;
         } else {
