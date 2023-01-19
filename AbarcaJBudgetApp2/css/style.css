@@ -1,17 +1,19 @@
-body{
-    background: linear-gradient(45deg, rgba(26,12,172,1) 14%, rgba(20,20,78,1) 81%);
+body {
+    background: linear-gradient(45deg,
+            rgba(26, 12, 172, 1) 14%,
+            rgba(20, 20, 78, 1) 81%);
     height: 100%;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-color: black;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
 .container {
     max-width: 425px;
 }
 
-h1{
+h1 {
     color: white;
     font-size: 35px;
 }
@@ -20,7 +22,7 @@ h1{
     width: 100%;
 }
 
-.DisplayTxt{
+.DisplayTxt {
     font-size: 1.5rem;
     color: white;
 }
@@ -30,18 +32,18 @@ h1{
 }
 
 .col-2.btn.btn-primary {
-    background-color: #9999FF;
-    border-color: #9999FF;
+    background-color: #9999ff;
+    border-color: #9999ff;
 }
 
 .col-2.btn.btn-primary:hover {
-    background-color: #A8A8FF;
-    border-color: #A8A8FF;
+    background-color: #a8a8ff;
+    border-color: #a8a8ff;
 }
 
 .btn:disabled {
-    background-color: #024AB6;
-    border-color: #024AB6;
+    background-color: #024ab6;
+    border-color: #024ab6;
     opacity: 0.9;
 }
 
@@ -54,4 +56,4 @@ h1{
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     border: 0;
-  }
+}
