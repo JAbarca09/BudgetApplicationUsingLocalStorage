@@ -6,3 +6,4 @@ This is a budget mobile web application using JavaScript Local storage.
 * Add a message when the user clicks on the budget input field when a budget is already declared and the Enter budget button is disabled. Show using the toast that a budget is inputted and too input another you have to use the reset button.
 * When the vendor's name is really long it causes the card to bug out and look weird. Set a character limit to the vendor!
     * Character limit should be 14 characters and under!
+    * Consider chaning the layout of the card instead, to where the vendor is on top and expense is on the bottom with the delete button still on the side
