@@ -143,6 +143,10 @@ function CalculateRemainingBudgetOnStart() {
 
 
 function CreateElement(Cost, Vendor) {
+    //check the length of the vendor!
+    let vendorTitle = CheckVendorCharacterLength(Vendor);
+    console.log(vendorTitle);
+
     let card = document.createElement('div');
     let cardBody = document.createElement('div');
     let cardRow = document.createElement('row');
@@ -155,7 +159,7 @@ function CreateElement(Cost, Vendor) {
 
     cardRow.className = "d-flex justify-content-center"
     Expense.className = "col-6 mt-2"
-    Expense.textContent = "$" + Number(Cost).toFixed(2) + " | " + Vendor;
+    Expense.textContent = "$" + Number(Cost).toFixed(2) + " | " + vendorTitle;
     DeleteButton.className = "col-2 btn btn-primary";
     DeleteButton.innerHTML = "<img src=\"../images/delete.png\" width=\"28px\" height=\"29px\" alt=\"remove expense garbage can icon\">";
 
@@ -230,6 +234,18 @@ function CheckForLocalStorageDisplayIt() {
 
 }
 
+
+function CheckVendorCharacterLength(vendorName){
+    let newName = '';
+    if(vendorName.length > 11) {
+        //When the vendor name is too long
+        newName = vendorName.slice(0, 11) + "...";
+    } else {
+        //Vendor name is fine
+        newName = vendorName;
+    }
+    return newName;
+}
 
 //resend the budget again to the like the user has to 
 
