@@ -158,6 +158,10 @@ function CalculateRemainingBudgetOnStart() {
 
 
 function CreateElement(Cost, Vendor) {
+    //figure out the Vendor name
+    let vendorName = CheckVendorNameLength(Vendor);
+
+
     let card = document.createElement("div");
     let cardBody = document.createElement("div");
     let cardRow = document.createElement("row");
@@ -176,7 +180,7 @@ function CreateElement(Cost, Vendor) {
     ExpenseAndVendor.className = "col-6 mt-2";
     Expense.className = "col-12 d-flex justify-content-center";
     displayVendor.className = "col-12 d-flex justify-content-center";
-    displayVendor.textContent = Vendor;
+    displayVendor.textContent = vendorName;
     Expense.textContent = "$" + Number(Cost).toFixed(2);
     DeleteButton.className = "col-2 btn btn-primary";
     DeleteButton.innerHTML = "<img src=\"../images/delete.png\" width=\"29px\" height=\"30px\" alt=\"remove expense garbage can icon\">";
@@ -225,7 +229,6 @@ function CreateElement(Cost, Vendor) {
 }
 
 
-
 function CalculateReminbursementBudget(userBudget, reimbursement) {
     //what if the user does not enter a budget or amounts on refresh, you have to do the calculations from local storage
     // let usersBudgetLocalStorage = GetUserBudget();
@@ -235,7 +238,6 @@ function CalculateReminbursementBudget(userBudget, reimbursement) {
     console.log(remainingBudget);
     return remainingBudget;
 }
-
 
 
 //get Local Storage when the application begins!
@@ -252,6 +254,17 @@ function CheckForLocalStorageDisplayIt() {
     DisplayOverallExpenses();
 }
 
+
+function CheckVendorNameLength(vendorName) {
+    //check the length of a vendor name 
+    let newVendorName;
+    if (vendorName.length > 18) {
+        newVendorName = vendorName.slice(0, 18) + "...";
+    } else {
+        newVendorName = vendorName;
+    }
+    return newVendorName;
+}
 
 //resend the budget again to the like the user has to
 
