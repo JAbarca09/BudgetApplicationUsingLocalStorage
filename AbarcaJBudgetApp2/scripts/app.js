@@ -1,5 +1,6 @@
 import { SaveBudgetToLocalStorage, AddAnotherExpenseToLocalStorage, AddAnotherVendorToLocalStorage, RemoveExpenseFromLocalStorage, RemoveVendorFromLocalStorage, GetUserBudget, GetVendorsFromLocalStorage, GetUserExpensesFromLocalStorage } from './localStorage.js';
 
+
 let EnterBudget = document.getElementById('EnterBudget');
 let EnterExpense = document.getElementById('EnterExpense');
 let EnterVendor = document.getElementById('EnterVendor')
@@ -7,17 +8,21 @@ let EnterBudgetBtn = document.getElementById('EnterBudgetBtn');
 let EnterExpenseBtn = document.getElementById('EnterExpenseBtn');
 let resetBtn = document.getElementById('resetBtn');
 
+
 let injectHere = document.getElementById('injectHere');
 let DisplayExpenses = document.getElementById('DisplayExpenses');
 let BudgetDisplay = document.getElementById('BudgetDisplay');
+
 
 //Connection to toast elements
 let alertToast = document.getElementById('alert-toast');
 let alertToastContent = document.getElementById('alert-toast-content');
 
+
 let budget = GetUserBudget();
 budget !== null ? EnterBudgetBtn.disabled = true : EnterBudgetBtn.disabled = false;
 budget !== null ? EnterBudget.disabled = true : EnterBudget.disabled = false;
+
 
 EnterBudgetBtn.addEventListener('click', function (e) {
     // console.log(EnterBudget.value);
@@ -42,8 +47,10 @@ EnterBudgetBtn.addEventListener('click', function (e) {
         EnterBudgetBtn.disabled = true;
         EnterBudget.disabled = true;
 
+
     }
 });
+
 
 EnterExpenseBtn.addEventListener('click', function (e) {
     //Check if there is a valid budget before the expense is added!
@@ -83,11 +90,13 @@ EnterExpenseBtn.addEventListener('click', function (e) {
         budget = CalculateRemainingBudget(budget, roundedExpense);
         DisplayOverallExpenses();
 
+
         //After the Expense and vendor is added clear it!
         EnterExpense.value = "";
         EnterVendor.value = "";
     }
 });
+
 
 //this clears local storage and refreshes the page!
 resetBtn.addEventListener('click', function () {
@@ -96,6 +105,7 @@ resetBtn.addEventListener('click', function () {
     EnterBudgetBtn.disabled = false;
     EnterBudget.disabled = false;
 });
+
 
 function DisplayOverallExpenses() {
     let sum = 0;
@@ -106,8 +116,10 @@ function DisplayOverallExpenses() {
         sum = Number(allExpenses[i]) + sum;
     }
 
+
     DisplayExpenses.textContent = "Expenses: $" + sum.toFixed(2);
 }
+
 
 function CalculateRemainingBudget(userBudget, Expense) {
     //if you do not update the original budget, it will always subtract the original budget the user entered from the expense and will be bugged!
@@ -116,6 +128,7 @@ function CalculateRemainingBudget(userBudget, Expense) {
     console.log(remainingBudget);
     return remainingBudget;
 }
+
 
 function CalculateRemainingBudgetOnStart() {
     //take the original budget, subtract it from the sum of the expenses
@@ -142,28 +155,36 @@ function CalculateRemainingBudgetOnStart() {
 }
 
 
-function CreateElement(Cost, Vendor) {
-    //check the length of the vendor!
-    let vendorTitle = CheckVendorCharacterLength(Vendor);
-    console.log(vendorTitle);
 
-    let card = document.createElement('div');
-    let cardBody = document.createElement('div');
-    let cardRow = document.createElement('row');
-    let Expense = document.createElement('div');
-    let DeleteButton = document.createElement('button');
+
+function CreateElement(Cost, Vendor) {
+    let card = document.createElement("div");
+    let cardBody = document.createElement("div");
+    let cardRow = document.createElement("row");
+    let ExpenseAndVendor = document.createElement("div");
+    let Expense = document.createElement("div");
+    let displayVendor = document.createElement("div");
+    let DeleteButton = document.createElement("button");
+
 
     card.id = Vendor + Cost;
     card.className = "card";
     cardBody.className = "card-body";
 
-    cardRow.className = "d-flex justify-content-center"
-    Expense.className = "col-6 mt-2"
-    Expense.textContent = "$" + Number(Cost).toFixed(2) + " | " + vendorTitle;
+
+    cardRow.className = "d-flex justify-content-center";
+    ExpenseAndVendor.className = "col-6 mt-2";
+    Expense.className = "col-12 d-flex justify-content-center";
+    displayVendor.className = "col-12 d-flex justify-content-center";
+    displayVendor.textContent = Vendor;
+    Expense.textContent = "$" + Number(Cost).toFixed(2);
     DeleteButton.className = "col-2 btn btn-primary";
     DeleteButton.innerHTML = "<img src=\"../images/delete.png\" width=\"28px\" height=\"29px\" alt=\"remove expense garbage can icon\">";
 
-    cardRow.appendChild(Expense);
+    //Build the card together
+    ExpenseAndVendor.appendChild(displayVendor);
+    ExpenseAndVendor.appendChild(Expense);
+    cardRow.appendChild(ExpenseAndVendor);
     cardRow.appendChild(DeleteButton);
     cardBody.appendChild(cardRow);
     card.appendChild(cardBody);
@@ -205,7 +226,6 @@ function CreateElement(Cost, Vendor) {
 
 
 
-
 function CalculateReminbursementBudget(userBudget, reimbursement) {
     //what if the user does not enter a budget or amounts on refresh, you have to do the calculations from local storage
     // let usersBudgetLocalStorage = GetUserBudget();
@@ -229,27 +249,14 @@ function CheckForLocalStorageDisplayIt() {
         CreateElement(Number(userExpenses[i]), vendors[j]);
         j++;
     }
-
     DisplayOverallExpenses();
-
 }
 
 
-function CheckVendorCharacterLength(vendorName){
-    let newName = '';
-    if(vendorName.length > 11) {
-        //When the vendor name is too long
-        newName = vendorName.slice(0, 11) + "...";
-    } else {
-        //Vendor name is fine
-        newName = vendorName;
-    }
-    return newName;
-}
-
-//resend the budget again to the like the user has to 
+//resend the budget again to the like the user has to
 
 CheckForLocalStorageDisplayIt();
 CalculateRemainingBudgetOnStart();
 BudgetDisplay.className = "DisplayTxt";
 DisplayExpenses.className = "DisplayTxt";
+
