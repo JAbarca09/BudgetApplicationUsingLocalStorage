@@ -183,7 +183,7 @@ function CreateElement(Cost, Vendor) {
     displayVendor.textContent = vendorName;
     Expense.textContent = "$" + Number(Cost).toFixed(2);
     DeleteButton.className = "col-2 btn btn-primary";
-    DeleteButton.innerHTML = "<img src=\"../images/delete.png\" width=\"29px\" height=\"30px\" alt=\"remove expense garbage can icon\">";
+    DeleteButton.innerHTML = "<img src=\"../images/delete.png\" width=\"29px\" height=\"30px\" alt=\"Remove Expense and Vendor button\">";
 
     //Build the card together
     ExpenseAndVendor.appendChild(displayVendor);
