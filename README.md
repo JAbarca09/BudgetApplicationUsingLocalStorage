@@ -7,4 +7,5 @@ This is a budget mobile web application using JavaScript Local storage.
 * Accessibility: users need to know that content was dynamically added onto the page
     * Tell user that there were changes with the budget and expenses
     * Tell user that there were changes because a card with expense and vendor was created to the DOM
+        * Documentation: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions
         * Example of dynamic content accessibility: https://www.youtube.com/watch?v=NTcpHJAmNTI&ab_channel=CassidyPittman
