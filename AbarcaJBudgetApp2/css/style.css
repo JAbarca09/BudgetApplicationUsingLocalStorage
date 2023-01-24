@@ -42,8 +42,8 @@ h1 {
 }
 
 .btn:disabled {
-    background-color: #024ab6;
-    border-color: #024ab6;
+    background-color: rgb(109, 109, 109);
+    border-color: rgb(109, 109, 109);
     opacity: 0.9;
 }
 
