@@ -192,7 +192,7 @@ function CreateElement(Cost, Vendor) {
     cardRow.appendChild(DeleteButton);
     cardBody.appendChild(cardRow);
     card.appendChild(cardBody);
-    injectHere.appendChild(card);
+    injectHere.insertBefore(card, injectHere.firstChild);
 
     DeleteButton.addEventListener('click', function (e) {
         //Remove both the cost and vendor from local storage!
