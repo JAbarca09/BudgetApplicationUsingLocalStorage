@@ -181,14 +181,14 @@ function CreateElement(Cost, Vendor) {
   DeleteButton.innerHTML =
     '<img src="../images/delete.png" width="29px" height="30px" alt="Remove Expense and Vendor button">';
 
-  //Build the card together
-  ExpenseAndVendor.appendChild(displayVendor);
-  ExpenseAndVendor.appendChild(Expense);
-  cardRow.appendChild(ExpenseAndVendor);
-  cardRow.appendChild(DeleteButton);
-  cardBody.appendChild(cardRow);
-  card.appendChild(cardBody);
-  injectHere.appendChild(card);
+    //Build the card together
+    ExpenseAndVendor.appendChild(displayVendor);
+    ExpenseAndVendor.appendChild(Expense);
+    cardRow.appendChild(ExpenseAndVendor);
+    cardRow.appendChild(DeleteButton);
+    cardBody.appendChild(cardRow);
+    card.appendChild(cardBody);
+    injectHere.appendChild(card);
 
   DeleteButton.addEventListener("click", function (e) {
     //Remove both the cost and vendor from local storage!
