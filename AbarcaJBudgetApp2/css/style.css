@@ -57,3 +57,9 @@ h1 {
     clip: rect(0, 0, 0, 0);
     border: 0;
 }
+
+.show {
+    background-color: rgb(252, 57, 57);
+    color: black;
+}
+
