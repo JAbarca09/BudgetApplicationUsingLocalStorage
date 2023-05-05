@@ -262,7 +262,7 @@ function CheckVendorNameLength(vendorName) {
     //check the length of a vendor name 
     let newVendorName;
     if (vendorName.length > 18) {
-        newVendorName = vendorName.slice(0, 18) + "...";
+        newVendorName = vendorName.slice(0, 13) + "..."; // was (0, 18) previously
     } else {
         newVendorName = vendorName;
     }
