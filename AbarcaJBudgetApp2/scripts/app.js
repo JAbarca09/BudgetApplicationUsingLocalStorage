@@ -1,5 +1,6 @@
 import { SaveBudgetToLocalStorage, AddAnotherExpenseToLocalStorage, AddAnotherVendorToLocalStorage, RemoveExpenseFromLocalStorage, RemoveVendorFromLocalStorage, GetUserBudget, GetVendorsFromLocalStorage, GetUserExpensesFromLocalStorage } from './localStorage.js';
 
+// FIXME long expenses spill onto the delete button
 
 let EnterBudget = document.getElementById('EnterBudget');
 let EnterExpense = document.getElementById('EnterExpense');
