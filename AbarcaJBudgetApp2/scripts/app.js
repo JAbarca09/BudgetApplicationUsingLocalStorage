@@ -177,7 +177,7 @@ function CreateElement(Cost, Vendor) {
   displayVendor.className = "col-12 d-flex justify-content-center";
   displayVendor.textContent = vendorName;
   Expense.textContent = "$" + Number(Cost).toFixed(2);
-  DeleteButton.className = "col-2 btn btn-primary";
+  DeleteButton.className = "col-md-2 col-lg-2 btn btn-primary delete-btn";
   DeleteButton.innerHTML =
     '<img src="../images/delete.png" width="29px" height="30px" alt="Remove Expense and Vendor button">';
 
