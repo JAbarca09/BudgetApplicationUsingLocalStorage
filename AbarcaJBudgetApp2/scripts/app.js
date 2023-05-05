@@ -1,24 +1,19 @@
-import {
-  SaveBudgetToLocalStorage,
-  AddAnotherExpenseToLocalStorage,
-  AddAnotherVendorToLocalStorage,
-  RemoveExpenseFromLocalStorage,
-  RemoveVendorFromLocalStorage,
-  GetUserBudget,
-  GetVendorsFromLocalStorage,
-  GetUserExpensesFromLocalStorage,
-} from "./localStorage.js";
+import { SaveBudgetToLocalStorage, AddAnotherExpenseToLocalStorage, AddAnotherVendorToLocalStorage, RemoveExpenseFromLocalStorage, RemoveVendorFromLocalStorage, GetUserBudget, GetVendorsFromLocalStorage, GetUserExpensesFromLocalStorage } from './localStorage.js';
 
-let EnterBudget = document.getElementById("EnterBudget");
-let EnterExpense = document.getElementById("EnterExpense");
-let EnterVendor = document.getElementById("EnterVendor");
-let EnterBudgetBtn = document.getElementById("EnterBudgetBtn");
-let EnterExpenseBtn = document.getElementById("EnterExpenseBtn");
-let resetBtn = document.getElementById("resetBtn");
+// FIXME long expenses spill onto the delete button
 
-let injectHere = document.getElementById("injectHere");
-let DisplayExpenses = document.getElementById("DisplayExpenses");
-let BudgetDisplay = document.getElementById("BudgetDisplay");
+let EnterBudget = document.getElementById('EnterBudget');
+let EnterExpense = document.getElementById('EnterExpense');
+let EnterVendor = document.getElementById('EnterVendor')
+let EnterBudgetBtn = document.getElementById('EnterBudgetBtn');
+let EnterExpenseBtn = document.getElementById('EnterExpenseBtn');
+let resetBtn = document.getElementById('resetBtn');
+
+
+let injectHere = document.getElementById('injectHere');
+let DisplayExpenses = document.getElementById('DisplayExpenses');
+let BudgetDisplay = document.getElementById('BudgetDisplay');
+
 
 //Connection to toast elements
 let alertToast = document.getElementById("alert-toast");
@@ -156,30 +151,33 @@ function CalculateRemainingBudgetOnStart() {
 }
 
 function CreateElement(Cost, Vendor) {
-  //figure out the Vendor name
-  let vendorName = CheckVendorNameLength(Vendor);
+    //figure out the Vendor name
+    let vendorName = CheckVendorNameLength(Vendor);
 
-  let card = document.createElement("div");
-  let cardBody = document.createElement("div");
-  let cardRow = document.createElement("row");
-  let ExpenseAndVendor = document.createElement("div");
-  let Expense = document.createElement("div");
-  let displayVendor = document.createElement("div");
-  let DeleteButton = document.createElement("button");
 
-  card.id = Vendor + Cost;
-  card.className = "card";
-  cardBody.className = "card-body";
+    let card = document.createElement("div");
+    let cardBody = document.createElement("div");
+    let cardRow = document.createElement("row");
+    let ExpenseAndVendor = document.createElement("div");
+    let Expense = document.createElement("div");
+    let displayVendor = document.createElement("div");
+    let DeleteButton = document.createElement("button");
 
-  cardRow.className = "d-flex justify-content-center";
-  ExpenseAndVendor.className = "col-6 mt-2";
-  Expense.className = "col-12 d-flex justify-content-center";
-  displayVendor.className = "col-12 d-flex justify-content-center";
-  displayVendor.textContent = vendorName;
-  Expense.textContent = "$" + Number(Cost).toFixed(2);
-  DeleteButton.className = "col-2 btn btn-primary";
-  DeleteButton.innerHTML =
-    '<img src="../images/delete.png" width="29px" height="30px" alt="Remove Expense and Vendor button">';
+
+    card.id = Vendor + Cost;
+    card.className = "card";
+    cardBody.className = "card-body";
+
+
+    cardRow.className = "d-flex justify-content-center";
+    ExpenseAndVendor.className = "col-6 mt-2";
+    Expense.className = "col-12 d-flex justify-content-center";
+    displayVendor.className = "col-12 d-flex justify-content-center";
+    displayVendor.textContent = vendorName;
+    Expense.textContent = "$" + Number(Cost).toFixed(2);
+    DeleteButton.className = "col-md-2 col-lg-2 btn btn-primary delete-btn";
+
+    DeleteButton.innerHTML = "<img src=\"../images/delete.png\" width=\"29px\" height=\"30px\" alt=\"Remove Expense and Vendor button\">";
 
     //Build the card together
     ExpenseAndVendor.appendChild(displayVendor);
@@ -249,14 +247,14 @@ function CheckForLocalStorageDisplayIt() {
 }
 
 function CheckVendorNameLength(vendorName) {
-  //check the length of a vendor name
-  let newVendorName;
-  if (vendorName.length > 18) {
-    newVendorName = vendorName.slice(0, 18) + "...";
-  } else {
-    newVendorName = vendorName;
-  }
-  return newVendorName;
+    //check the length of a vendor name 
+    let newVendorName;
+    if (vendorName.length > 18) {
+        newVendorName = vendorName.slice(0, 13) + "..."; // was (0, 18) previously
+    } else {
+        newVendorName = vendorName;
+    }
+    return newVendorName;
 }
 
 //resend the budget again to the like the user has to
