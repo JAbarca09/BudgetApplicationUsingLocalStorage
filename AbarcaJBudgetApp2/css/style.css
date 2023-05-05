@@ -41,6 +41,11 @@ h1 {
     border-color: #a8a8ff;
 }
 
+.delete-btn {
+    background-color: #9999ff;
+    border-color: #9999ff;
+}
+
 .btn:disabled {
     background-color: rgb(109, 109, 109);
     border-color: rgb(109, 109, 109);
